@@ -1,0 +1,176 @@
+:root {
+    --radial-background: radial-gradient(circle at 50% 0,
+            rgba(255, 0, 0, 0.5),
+            rgba(255, 0, 0, 0) 70.71%),
+        radial-gradient(circle at 6.7% 75%,
+            rgba(0, 0, 255, 0.5),
+            rgba(0, 0, 255, 0) 70.71%),
+        radial-gradient(circle at 93.3% 75%,
+            rgba(0, 255, 0, 0.5),
+            rgba(0, 255, 0, 0) 70.71%) beige;
+    --hover-cell-background: linear-gradient(45deg, white, #00ffc38f);
+    --hover-month-cell-background: linear-gradient(45deg,
+            rgba(176, 245, 170, 0.322),
+            #00ffc365);
+    --selected-background: linear-gradient(135deg, #00ff80ab, #ffc0c0bd);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    user-select: none;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    color: #392e2e;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.month-selector {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--radial-background);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.selectable-month {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 2px;
+    background-clip: content-box;
+    border-radius: 10px;
+}
+
+.selectable-month:hover {
+    background: var(--hover-month-cell-background);
+    background-clip: content-box;
+}
+
+.selected-month {
+    background: var(--selected-background);
+    background-clip: content-box;
+}
+
+.calendar {
+    position: relative;
+    box-shadow: 0 3px 6px #ddd;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--radial-background);
+}
+
+.header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* margin: 10px 15px; */
+}
+
+.header--info {
+    flex: 1;
+    font-size: 1.5em;
+}
+
+.header--month {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.header-icons span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 10px;
+    /* margin: 10px; */
+    border-radius: 5px;
+}
+
+.header-icons span:hover {
+    background: #ffffff3b;
+}
+
+.weekrow {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #ffffff3b;
+    /* margin: 10px 0 1px; */
+    border-radius: 5px;
+}
+
+.weekday {
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-clip: content-box;
+}
+
+.day {
+    height: 100%;
+    /* display: grid; */
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff3b;
+    padding: 5px;
+    background-clip: content-box;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.day:not(.today):hover {
+    background: var(--hover-cell-background);
+    background-clip: content-box;
+}
+
+.holiday {
+    background: linear-gradient(135deg, #ff0000ab, #ffc0e3);
+    background-clip: content-box;
+}
+
+.today {
+    background: var(--selected-background);
+    background-clip: content-box;
+}
+.event {
+    height: 100%;
+    width: 100%;
+    padding: 8px; 
+    display: flex;
+    
+}
+.eventDay {
+    display: flex;
+    justify-content:flex-start;
+}
+/* .hiddenEvent {
+    overflow-y: hidden;
+} */
+.visibleEvent {
+    border-radius: 5px;
+    background-color: #ffc0e3;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+.eventList {
+    justify-content: center;
+}

@@ -1,0 +1,20 @@
+.App {
+ height: 100%;
+}
+.form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 30px;
+}
+#login {
+    background-image: url("../public/calendar_img.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.errorMsg {
+    color: red;
+    margin: 0;
+}
