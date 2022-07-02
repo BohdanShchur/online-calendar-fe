@@ -50,7 +50,7 @@ const EventDialog = ({ open, handleClose, day, event, isEdit, refetch }) => {
     const [createEvent] = useCreateEvent();
     const [updateEvent] = useUpdateEvent();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         if (isEdit) {
             updateEvent({
                 variables: {
@@ -65,6 +65,8 @@ const EventDialog = ({ open, handleClose, day, event, isEdit, refetch }) => {
                     },
                     eventId: event._id
                 }
+            }).then(() => {
+                refetch();
             })
         } else {
             createEvent({
@@ -79,9 +81,10 @@ const EventDialog = ({ open, handleClose, day, event, isEdit, refetch }) => {
                         notificationTime: values.notificationTime
                     }
                 }
+            }).then(() => {
+                refetch();
             })
         }
-        refetch();
         handleClose();
         e.preventDefault();
     }

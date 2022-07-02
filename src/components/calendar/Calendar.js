@@ -33,7 +33,6 @@ const Calendar = ({
     selectedDate: date,
     firstWeekDayNumber
   });
-  console.log(state);
   const { loading, events, error, refetch } = useGetEvents(state.calendarDays);
 
   return (
@@ -110,7 +109,7 @@ const Calendar = ({
                         isAdditionalDay ? 'calendar__additional__day' : ''
                       ].join(' ')}
                     >
-                      <Day day={day.dayInfo} events={day.events} handleCreate={(date, mode) => handleOpen(date, mode)} />
+                      <Day day={day.dayInfo} events={day.events} handleCreate={(date, mode) => handleOpen(date, mode)} refetch={refetch} />
                     </Grid>
                   );
                 })}

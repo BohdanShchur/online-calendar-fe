@@ -20,7 +20,7 @@ export const useGetEvents = (calendarDays) => {
         start: calendarDays[0].date.toISOString(),
         end: calendarDays[calendarDays.length - 1].date.toISOString()
     }
-    const {loading, data, error} = useQuery(query, {
+    const {loading, data, error, refetch} = useQuery(query, {
         variables: {
             filter
         }
@@ -37,5 +37,5 @@ export const useGetEvents = (calendarDays) => {
             return({dayInfo: day, events: array})
         });
     }
-    return {loading, events, error};
+    return {loading, events, error, refetch};
 };

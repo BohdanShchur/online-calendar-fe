@@ -6,16 +6,15 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 
 const GoogleButton = () => {
     const responseGoogleSuccess = (response) => {
-        console.log('response', response);
     };
-    const responseGoogleFailure = (error) => console.log('fail', error);
+    const responseGoogleFailure = (error) => { throw error };
     return (
         <GoogleLogin
             disabled={false}
             clientId={"362396372866-g98m1mrstkbsu0oerveha80gvrp710pe.apps.googleusercontent.com"}
             render={(props) => (
-                <GoogleLoginButton onClick={props.onClick}/>
-                )
+                <GoogleLoginButton onClick={props.onClick} />
+            )
             }
             onSuccess={responseGoogleSuccess}
             onFailure={responseGoogleFailure}

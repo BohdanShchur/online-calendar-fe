@@ -3,9 +3,11 @@ import { Button, Card, CardContent, Menu, MenuItem, Paper } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDeleteEvent } from './hooks/useMutationsEvent';
 import { CustomPopover } from '../popover/customPopover';
+import { useGetEvents } from './hooks/useGetEvents';
+import { useCalendar } from './hooks/useCalendar';
 
 
-export const EventsPopover = ({ events, anchorEl, handleClosePopover, handleCreate, day }) => {
+export const EventsPopover = ({ events, anchorEl, openPop, idPop, handleClosePopover, handleCreate, day, refetch }) => {
     const [anchorElMenu, setAnchorElMenu] = React.useState(null);
     const openMenu = Boolean(anchorElMenu);
     const handleClick = (event) => {
@@ -18,12 +20,14 @@ export const EventsPopover = ({ events, anchorEl, handleClosePopover, handleCrea
     const id = open ? 'simple-popover' : undefined;
 
     const [deleteEvent] = useDeleteEvent();
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         deleteEvent({
             variables: {
                 eventId: id
             }
-        })
+        }).then(() => {
+            refetch();
+        });
     }
 
     return (
@@ -48,10 +52,10 @@ export const EventsPopover = ({ events, anchorEl, handleClosePopover, handleCrea
                             }}>
                                 <div className='event_card_time'>
                                     <div>
-                                        {new Date(event.eventTimeRange.start).toLocaleTimeString('default', { hour: '2-digit', minute: '2-digit' })}
+                                        start: {new Date(event.eventTimeRange.start).toLocaleTimeString('default', { hour: '2-digit', minute: '2-digit' })}
                                     </div>
                                     <div>
-                                        {new Date(event.eventTimeRange.start).toLocaleTimeString('default', { hour: '2-digit', minute: '2-digit' })}
+                                       end:  {new Date(event.eventTimeRange.end).toLocaleTimeString('default', { hour: '2-digit', minute: '2-digit' })}
                                     </div>
                                 </div>
                                 <div className='event_card_content'>
@@ -80,13 +84,17 @@ export const EventsPopover = ({ events, anchorEl, handleClosePopover, handleCrea
                                         onClick={() => {
                                             handleClose();
                                             handleClosePopover();
-                                            handleCreate(event, true);
+                                            handleCreate(event, true, refetch);
                                         }}
                                     >
                                         Edit
                                     </MenuItem>
                                     <MenuItem
-                                        onClick={() => handleDelete(event._id)}
+                                        onClick={() =>{
+                                            handleClose();
+                                            handleClosePopover();
+                                            handleDelete(event._id);
+                                        }}
                                     >Delete</MenuItem>
                                 </Menu>
                             </div>

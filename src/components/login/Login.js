@@ -54,7 +54,6 @@ const Login = () => {
                 },
                 fetchPolicy: "no-cache"
             }).then(({ data }) => {
-                console.log(data)
                 const { token } = data.loginUser;
                 if (token) {
                     localStorage.setItem('token', token);
@@ -64,7 +63,6 @@ const Login = () => {
             });
         }
     });
-    console.log(error)
     const handleClickShowPassword = () => {
         setShowPassword(prev => !prev);
     };

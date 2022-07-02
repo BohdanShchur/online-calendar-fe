@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CardHeader, Menu, MenuItem, Paper } from '@m
 import { EventsPopover } from './EventsPopover';
 
 import { MoreHoriz } from '@mui/icons-material';
-const Day = ({ day, events, handleCreate }) => {
+const Day = ({ day, events, handleCreate, refetch }) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -14,8 +14,6 @@ const Day = ({ day, events, handleCreate }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
 
     const firstViewEvents = events.slice(-2);
 
@@ -41,7 +39,8 @@ const Day = ({ day, events, handleCreate }) => {
                 anchorEl={anchorEl}
                 handleClosePopover={handleClose}
                 handleCreate={handleCreate}
-                day={day} />
+                day={day}
+                refetch={refetch} />
         </>
     )
 }
